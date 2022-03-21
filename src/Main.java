@@ -13,11 +13,15 @@ public class Main {
             trainingPath = args[0];
             testingPath = args[1];
             numberOfNeighbours = Integer.parseInt(args[2]);
+        } else {
+            throw new IllegalArgumentException("Wrong input parameters.");
         }
 
         Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes);
         Attributes.insertVectorsIntoArrays(testingPath, testingAttributes);
 
+
+        //TODO: all below is just for debugging purposes
         for (Attributes v : trainingAttributes) {
             System.out.println(v.attributes.entrySet());
         }
@@ -26,6 +30,6 @@ public class Main {
             System.out.println(v.attributes.entrySet());
         }
         System.out.println("Testing");
+        Attributes.euclideanDistance(trainingAttributes.get(1),trainingAttributes.get(2));
     }
-
 }
