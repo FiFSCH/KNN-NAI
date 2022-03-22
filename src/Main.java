@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Main {
     protected static String trainingPath;
@@ -17,8 +18,20 @@ public class Main {
             throw new IllegalArgumentException("Wrong input parameters.");
         }
 
-        Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes,1);
+        Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes, 1);
         Attributes.insertVectorsIntoArrays(testingPath, testingAttributes, 0);
+
+        Iterator<Attributes> it = trainingAttributes.iterator();
+        Iterator<Attributes> it2 = testingAttributes.iterator();
+        int i = 0;
+        while ( it.hasNext() && it2.hasNext() ) {
+            trainingAttributes.get(i).distanceFromAnotherAttribute = Attributes.euclideanDistance(trainingAttributes.get(i), testingAttributes.get(i));
+            i++;
+            it.next();
+            it2.next();
+        }
+        trainingAttributes.removeIf(a -> a.distanceFromAnotherAttribute == 0.0f);
+        trainingAttributes.sort(new Comparator());
 
 
         //TODO: all below is just for debugging purposes
@@ -30,10 +43,9 @@ public class Main {
             System.out.println(v.attributes.entrySet());
         }
         System.out.println("Testing");
-        for (int i = 0; i < testingAttributes.size(); i++) {
-            Attributes.euclideanDistance(trainingAttributes.get(i),testingAttributes.get(i));
+        for (int k = 0; k < testingAttributes.size(); k++) {
+            Attributes.euclideanDistance(trainingAttributes.get(k), testingAttributes.get(k));
         }
         System.out.println(Attributes.decisionAttributes);
-
     }
 }

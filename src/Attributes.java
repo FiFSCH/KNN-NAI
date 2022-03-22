@@ -7,10 +7,13 @@ import java.util.stream.Collectors;
 public class Attributes {
     protected static ArrayList<String> decisionAttributes = new ArrayList<>();
     HashMap<ArrayList<Float>, String> attributes;
+    protected String name;
+    protected float distanceFromAnotherAttribute;
 
 
-    public Attributes(HashMap<ArrayList<Float>, String> attributes) {
+    public Attributes(HashMap<ArrayList<Float>, String> attributes, String name) {
         this.attributes = attributes;
+        this.name = name;
     }
 
     protected static void insertVectorsIntoArrays(String path, ArrayList<Attributes> whichVectorsList, int flag) {
@@ -27,13 +30,12 @@ public class Attributes {
                 for (int i = 0; i < whichDataSet.length - 1; i++) {
                     tmp.add(Float.parseFloat(whichDataSet[i]));
                 }
-
                 tmpMap.put(tmp, whichDataSet[whichDataSet.length - 1]);
                 if (flag == 1) {
                     decisionAttributes.add(whichDataSet[whichDataSet.length - 1]);
                     decisionAttributes = decisionAttributes.stream().distinct().collect(Collectors.toCollection(ArrayList<String>::new));
                 }
-                whichVectorsList.add(new Attributes(tmpMap));
+                whichVectorsList.add(new Attributes(tmpMap,whichDataSet[whichDataSet.length - 1]));
                 line = reader.readLine();
             }
             reader.close();
