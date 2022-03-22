@@ -1,7 +1,7 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Main {
+    //TODO: User attribute input
     protected static String trainingPath;
     protected static String testingPath;
     protected static int numberOfNeighbours;
@@ -20,32 +20,9 @@ public class Main {
 
         Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes, 1);
         Attributes.insertVectorsIntoArrays(testingPath, testingAttributes, 0);
+        System.out.println("Training set location: " + trainingPath + "\nTesting set location: " + testingPath
+                + "\nNumber of neighbours: " + numberOfNeighbours + "\nFound Decision attributes:" + Attributes.decisionAttributes);
 
-        Iterator<Attributes> it = trainingAttributes.iterator();
-        Iterator<Attributes> it2 = testingAttributes.iterator();
-        int i = 0;
-        while ( it.hasNext() && it2.hasNext() ) {
-            trainingAttributes.get(i).distanceFromAnotherAttribute = Attributes.euclideanDistance(trainingAttributes.get(i), testingAttributes.get(i));
-            i++;
-            it.next();
-            it2.next();
-        }
-        trainingAttributes.removeIf(a -> a.distanceFromAnotherAttribute == 0.0f);
-        trainingAttributes.sort(new Comparator());
-
-
-        //TODO: all below is just for debugging purposes
-        for (Attributes v : trainingAttributes) {
-            System.out.println(v.attributes.entrySet());
-        }
-        System.out.println("TRAINING");
-        for (Attributes v : testingAttributes) {
-            System.out.println(v.attributes.entrySet());
-        }
-        System.out.println("Testing");
-        for (int k = 0; k < testingAttributes.size(); k++) {
-            Attributes.euclideanDistance(trainingAttributes.get(k), testingAttributes.get(k));
-        }
-        System.out.println(Attributes.decisionAttributes);
+        Comparator.regression(testingAttributes);
     }
 }

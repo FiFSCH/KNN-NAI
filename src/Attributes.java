@@ -35,7 +35,7 @@ public class Attributes {
                     decisionAttributes.add(whichDataSet[whichDataSet.length - 1]);
                     decisionAttributes = decisionAttributes.stream().distinct().collect(Collectors.toCollection(ArrayList<String>::new));
                 }
-                whichVectorsList.add(new Attributes(tmpMap,whichDataSet[whichDataSet.length - 1]));
+                whichVectorsList.add(new Attributes(tmpMap, whichDataSet[whichDataSet.length - 1]));
                 line = reader.readLine();
             }
             reader.close();
