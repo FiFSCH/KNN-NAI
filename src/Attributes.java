@@ -26,7 +26,7 @@ public class Attributes {
                 String[] whichDataSet = line.split(",");
                 ArrayList<Float> tmp = new ArrayList<>();
                 HashMap<ArrayList<Float>, String> tmpMap = new HashMap<>();
-                Main.vectorDimensionality = whichDataSet.length -1;
+                Main.vectorDimensionality = whichDataSet.length - 1;
                 for (int i = 0; i < whichDataSet.length - 1; i++) {
                     tmp.add(Float.parseFloat(whichDataSet[i]));
                 }

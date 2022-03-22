@@ -10,8 +10,8 @@ public class Comparator implements java.util.Comparator<Attributes> {
 
     protected static void regression(ArrayList<Attributes> set2) {
 
-        if (Main.numberOfNeighbours >= Main.trainingAttributes.size())
-            throw new IllegalArgumentException("K is too big!");
+        if (Main.numberOfNeighbours >= Main.trainingAttributes.size() || Main.numberOfNeighbours <= 0)
+            throw new IllegalArgumentException("Provide different number of neighbours!");
 
         float correct = 0.0f, totalNumberOfCases = 0.0f;
 
@@ -33,14 +33,19 @@ public class Comparator implements java.util.Comparator<Attributes> {
             }
 
             String decision = mostFrequent(mostCommonDecisionAttribute);
-
-            if (test.name.equalsIgnoreCase(decision))
-                correct++;
-            totalNumberOfCases++;
+            if (CLI.userInputFlag == 0) {
+                if (test.name.equalsIgnoreCase(decision))
+                    correct++;
+                totalNumberOfCases++;
+            } else if (CLI.userInputFlag == 1) {
+                System.out.println("Your vector have been classified as " + decision);
+            }
         }
-        float accuracy = (correct / totalNumberOfCases) * 100;
-        String accuracyString = String.format("%.2f", accuracy);
-        System.out.println("Total number of cases: " + totalNumberOfCases + "\nAccuracy: " + accuracyString +"%");
+        if (CLI.userInputFlag == 0) {
+            float accuracy = (correct / totalNumberOfCases) * 100;
+            String accuracyString = String.format("%.2f", accuracy);
+            System.out.println("Total number of cases: " + totalNumberOfCases + "\nAccuracy: " + accuracyString + "%");
+        }
 
     }
 

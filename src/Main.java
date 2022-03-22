@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 
 public class Main {
-    //TODO: User attribute input
     protected static String trainingPath;
     protected static String testingPath;
     protected static int numberOfNeighbours;
     protected static int vectorDimensionality;
-
     protected static ArrayList<Attributes> trainingAttributes = new ArrayList<>();
     protected static ArrayList<Attributes> testingAttributes = new ArrayList<>();
 
@@ -18,13 +16,8 @@ public class Main {
         } else {
             throw new IllegalArgumentException("Wrong input parameters.");
         }
-
         Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes, 1);
         Attributes.insertVectorsIntoArrays(testingPath, testingAttributes, 0);
-        System.out.println("Training set location: " + trainingPath + "\nTesting set location: " + testingPath
-                + "\nNumber of neighbours: " + numberOfNeighbours + "\nVector Dimensionality: " + vectorDimensionality
-                + "\nFound Decision attributes:" + Attributes.decisionAttributes);
-
-        Comparator.regression(testingAttributes);
+        CLI.Menu();
     }
 }
