@@ -40,7 +40,7 @@ public class Comparator implements java.util.Comparator<Attributes> {
         }
         float accuracy = (correct / totalNumberOfCases) * 100;
         String accuracyString = String.format("%.2f", accuracy);
-        System.out.println("Total number of cases: " + totalNumberOfCases + "\nAccuracy: " + accuracyString);
+        System.out.println("Total number of cases: " + totalNumberOfCases + "\nAccuracy: " + accuracyString +"%");
 
     }
 
