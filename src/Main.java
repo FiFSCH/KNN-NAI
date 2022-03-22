@@ -17,8 +17,8 @@ public class Main {
             throw new IllegalArgumentException("Wrong input parameters.");
         }
 
-        Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes);
-        Attributes.insertVectorsIntoArrays(testingPath, testingAttributes);
+        Attributes.insertVectorsIntoArrays(trainingPath, trainingAttributes,1);
+        Attributes.insertVectorsIntoArrays(testingPath, testingAttributes, 0);
 
 
         //TODO: all below is just for debugging purposes
@@ -30,6 +30,10 @@ public class Main {
             System.out.println(v.attributes.entrySet());
         }
         System.out.println("Testing");
-        Attributes.euclideanDistance(trainingAttributes.get(1),trainingAttributes.get(2));
+        for (int i = 0; i < testingAttributes.size(); i++) {
+            Attributes.euclideanDistance(trainingAttributes.get(i),testingAttributes.get(i));
+        }
+        System.out.println(Attributes.decisionAttributes);
+
     }
 }

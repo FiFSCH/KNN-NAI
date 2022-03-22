@@ -2,15 +2,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class Attributes {
+    protected static ArrayList<String> decisionAttributes = new ArrayList<>();
     HashMap<ArrayList<Float>, String> attributes;
+
 
     public Attributes(HashMap<ArrayList<Float>, String> attributes) {
         this.attributes = attributes;
     }
 
-    protected static void insertVectorsIntoArrays(String path, ArrayList<Attributes> whichVectorsList) {
+    protected static void insertVectorsIntoArrays(String path, ArrayList<Attributes> whichVectorsList, int flag) {
         try {
 
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -26,6 +29,10 @@ public class Attributes {
                 }
 
                 tmpMap.put(tmp, whichDataSet[whichDataSet.length - 1]);
+                if (flag == 1) {
+                    decisionAttributes.add(whichDataSet[whichDataSet.length - 1]);
+                    decisionAttributes = decisionAttributes.stream().distinct().collect(Collectors.toCollection(ArrayList<String>::new));
+                }
                 whichVectorsList.add(new Attributes(tmpMap));
                 line = reader.readLine();
             }
@@ -35,7 +42,7 @@ public class Attributes {
         }
     }
 
-    //I assume that dimension are the same that's why in the loop im using size of one of them
+    //I assume that dimensions are the same that's why in the loop im using size of one of them
     protected static float euclideanDistance(Attributes attribute1, Attributes attribute2) {
         float distance = 0.0f;
         ArrayList<Float> tmp1 = convertSetIntoArray(attribute1);
